@@ -70,19 +70,6 @@ Tài liệu này dùng để **thống nhất dữ liệu, quy ước và cách 
 2. **Giá không dừng (non-stationary)**: giá tăng từ ~10 lên ~340 nên các mô hình dễ học "xu hướng tăng" thay vì quy luật thật. Các thang đo của cột cũng chênh lệch rất lớn (`Volume` ~10⁸, `Return_1` ~10⁻²) nên **bắt buộc chuẩn hoá** khi dùng mạng nơ-ron (xem mục 4).
 3. **Đa số feature đều là thông tin của ngày t**, còn `nextPrice` là ngày t+1. Tuyệt đối không dùng thông tin từ ngày t+1 trở đi làm feature.
 
-### 2.4. Chỉ báo kỹ thuật dự kiến (chưa có trong file)
-
-Theo slide, input của nhóm gồm OHLCV kết hợp **RSI, MACD, MA và lợi suất trễ**. Các cột này **chưa có** trong `Apple_Stock_ML_ready.csv`, cần tạo thêm nếu nhóm quyết định dùng:
-
-| Nhóm | Gợi ý tham số chuẩn |
-|---|---|
-| MA (trung bình động của `Price`) | 5, 10, 20 ngày |
-| RSI | 14 ngày |
-| MACD | EMA 12 − EMA 26, đường tín hiệu 9 ngày |
-| Lợi suất trễ | `Return_1` của các ngày t-1, t-2, t-3, ... |
-
-Mọi chỉ báo chỉ được tính từ dữ liệu **đến hết ngày t**, không dùng dữ liệu từ ngày t+1 trở đi. Các dòng đầu bị NaN do cần dữ liệu quá khứ sẽ bị bỏ. ARIMA là mô hình đơn biến nên không dùng các feature này.
-
 ---
 
 ## 3. Quy ước chia dữ liệu (BẮT BUỘC)
